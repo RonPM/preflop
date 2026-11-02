@@ -72,8 +72,8 @@ describe("calcul exact des probabilités", () => {
 
 describe("description du duel", () => {
   it("notation courte", () => {
-    expect(handCode(hand("KsAs"))).toBe("ARs");
-    expect(handCode(hand("AsKd"))).toBe("ARo");
+    expect(handCode(hand("KsAs"))).toBe("AKs");
+    expect(handCode(hand("AsKd"))).toBe("AKo");
     expect(handCode(hand("7h7d"))).toBe("77");
   });
 

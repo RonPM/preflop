@@ -1,10 +1,10 @@
 // Représentation des cartes.
 // Une carte est un entier de 0 à 51 : carte = couleur * 13 + rang.
-// Rang : 0 = 2, 1 = 3, … 8 = 10, 9 = Valet, 10 = Dame, 11 = Roi, 12 = As.
+// Rang : 0 = 2, 1 = 3, … 8 = 10, 9 = Jack, 10 = Queen, 11 = King, 12 = As.
 // Couleur : 0 = pique, 1 = cœur, 2 = carreau, 3 = trèfle.
 
-export const RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "V", "D", "R", "A"];
-export const RANK_NAMES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Valet", "Dame", "Roi", "As"];
+export const RANKS = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+export const RANK_NAMES = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "As"];
 export const SUITS = [
   { symbol: "♠", name: "pique", red: false },
   { symbol: "♥", name: "cœur", red: true },

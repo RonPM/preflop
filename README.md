@@ -13,7 +13,7 @@ Après un all-in perdu (ou gagné), un joueur se demande : « J'avais combien de
 - **Saisie des deux mains** carte par carte, dans un sélecteur des 52 cartes (les cartes déjà prises sont grisées).
 - **Probabilités exactes** pour chaque joueur : victoire, égalité, défaite, et chances globales (victoires + moitié des égalités).
 - **Verdict en clair** : « Grand favori », « Pile ou face », « Outsider »…, avec le type de duel (paire contre deux cartes plus hautes, main dominée…).
-- **Exemples célèbres** en un clic (AA contre RR, AR contre DD…), bouton pour inverser les joueurs et pour recommencer.
+- **Exemples célèbres** en un clic (AA contre KK, AK contre QQ…), bouton pour inverser les joueurs et pour recommencer.
 - **Responsive** : utilisable sur ordinateur et sur mobile.
 
 ## Choix techniques
@@ -21,7 +21,7 @@ Après un all-in perdu (ou gagné), un joueur se demande : « J'avais combien de
 - **Calcul exact, pas de simulation** : les 1 712 304 tableaux possibles (5 cartes parmi les 48 restantes) sont tous passés en revue.
 - **Évaluateur de mains par opérations sur les bits** (`src/lib/evaluator.js`) : chaque main de 7 cartes est représentée par 4 masques de 13 bits (un par couleur). Le calcul complet prend environ 150 ms.
 - **Web Worker** (`src/lib/equity.worker.js`) : le calcul tourne en arrière-plan, l'interface reste fluide. Les résultats déjà calculés sont gardés en mémoire.
-- **Tests unitaires** (Vitest) : catégories de mains, départages, roue (As-2-3-4-5), nombre de tableaux, valeurs de référence (AA contre RR), symétrie. L'évaluateur a aussi été comparé à un évaluateur de référence naïf sur 400 000 mains aléatoires, sans aucune différence.
+- **Tests unitaires** (Vitest) : catégories de mains, départages, roue (As-2-3-4-5), nombre de tableaux, valeurs de référence (AA contre KK), symétrie. L'évaluateur a aussi été comparé à un évaluateur de référence naïf sur 400 000 mains aléatoires, sans aucune différence.
 - React 19 + Vite, sans dépendance supplémentaire ni serveur.
 
 ## Structure du projet

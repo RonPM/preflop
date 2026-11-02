@@ -47,7 +47,7 @@ export default function CardPicker({ player, slot, used, current, onChoose, onCl
             </div>
           ))}
         </div>
-        <p className="picker-note">V = Valet, D = Dame, R = Roi, A = As</p>
+        <p className="picker-note">J = Jack, Q = Queen, K = King, A = As</p>
       </div>
     </div>
   );

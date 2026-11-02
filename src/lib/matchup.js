@@ -1,8 +1,8 @@
 import { RANK_NAMES, rankOf, suitOf } from "./cards.js";
 
-// Noms des rangs au pluriel, pour décrire les paires (« paire de Rois »).
-const PLURAL = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Valets", "Dames", "Rois", "As"];
-const SHORT = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "V", "D", "R", "A"];
+// Noms des rangs au pluriel, pour décrire les paires (« paire de Kings »).
+const PLURAL = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jacks", "Queens", "Kings", "As"];
+const SHORT = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 
 // Notation courte d'une main : « AA », « AKs » (assortie), « AKo » (dépareillée).
 export function handCode(hand) {
