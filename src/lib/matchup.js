@@ -1,15 +1,15 @@
-import { RANK_NAMES, rankOf, suitOf } from "./cards.js";
+import { RANKS, RANK_NAMES, rankOf, suitOf } from "./cards.js";
 
 // Noms des rangs au pluriel, pour décrire les paires (« paire de Kings »).
 const PLURAL = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "Jacks", "Queens", "Kings", "As"];
-const SHORT = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
 
 // Notation courte d'une main : « AA », « AKs » (assortie), « AKo » (dépareillée).
 export function handCode(hand) {
   const [a, b] = [...hand].sort((x, y) => rankOf(y) - rankOf(x));
-  const ra = rankOf(a), rb = rankOf(b);
-  if (ra === rb) return SHORT[ra] + SHORT[rb];
-  return SHORT[ra] + SHORT[rb] + (suitOf(a) === suitOf(b) ? "s" : "o");
+  const ra = rankOf(a),
+    rb = rankOf(b);
+  if (ra === rb) return RANKS[ra] + RANKS[rb];
+  return RANKS[ra] + RANKS[rb] + (suitOf(a) === suitOf(b) ? "s" : "o");
 }
 
 export function describeHand(hand) {

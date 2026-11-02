@@ -1,15 +1,16 @@
+import { formatPercent, formatInteger } from "../lib/format.js";
+import { isEmpty } from "../lib/slots.js";
 import { handCode, matchupType } from "../lib/matchup.js";
-
-const fmt = (x) => x.toLocaleString("fr-FR", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
 // Zone centrale : barre de probabilités, type de duel et actions.
 export default function Showdown({ status, hands, percentages, ms, onReset, onSwap }) {
-  const complete = hands.flat().every((c) => c !== null);
-  const empty = hands.flat().every((c) => c === null);
+  const empty = isEmpty(hands);
 
   return (
     <section className="showdown" aria-label="Résultat">
-      <div className="vs" aria-hidden="true">VS</div>
+      <div className="vs" aria-hidden="true">
+        VS
+      </div>
 
       {status === "computing" && (
         <div className="computing">
@@ -21,21 +22,26 @@ export default function Showdown({ status, hands, percentages, ms, onReset, onSw
       {status === "done" && percentages && (
         <div className="result">
           <p className="matchup-title">
-            <span className="p1-text">{handCode(hands[0])}</span> contre <span className="p2-text">{handCode(hands[1])}</span>
+            <span className="p1-text">{handCode(hands[0])}</span> contre{" "}
+            <span className="p2-text">{handCode(hands[1])}</span>
           </p>
-          <div className="bar" role="img" aria-label={`Joueur 1 ${fmt(percentages.p1.win)} %, égalité ${fmt(percentages.p1.tie)} %, joueur 2 ${fmt(percentages.p2.win)} %`}>
+          <div
+            className="bar"
+            role="img"
+            aria-label={`Joueur 1 ${formatPercent(percentages.p1.win)} %, égalité ${formatPercent(percentages.p1.tie)} %, joueur 2 ${formatPercent(percentages.p2.win)} %`}
+          >
             <span className="bar-p1" style={{ width: `${percentages.p1.win}%` }} />
             <span className="bar-tie" style={{ width: `${percentages.p1.tie}%` }} />
             <span className="bar-p2" style={{ width: `${percentages.p2.win}%` }} />
           </div>
           <div className="bar-legend">
-            <span className="p1-text">{fmt(percentages.p1.win)} %</span>
-            <span className="muted">égalité {fmt(percentages.p1.tie)} %</span>
-            <span className="p2-text">{fmt(percentages.p2.win)} %</span>
+            <span className="p1-text">{formatPercent(percentages.p1.win)} %</span>
+            <span className="muted">égalité {formatPercent(percentages.p1.tie)} %</span>
+            <span className="p2-text">{formatPercent(percentages.p2.win)} %</span>
           </div>
           <p className="matchup-type">{matchupType(hands[0], hands[1])}</p>
           <p className="proof">
-            Calcul exact sur {percentages.boards.toLocaleString("fr-FR")} tableaux possibles
+            Calcul exact sur {formatInteger(percentages.boards)} tableaux possibles
             {ms !== undefined ? ` · ${ms} ms` : ""}
           </p>
           <p className="proof">Chances affichées = victoires + moitié des égalités (pot partagé).</p>
@@ -45,12 +51,16 @@ export default function Showdown({ status, hands, percentages, ms, onReset, onSw
       {status === "error" && <p className="muted">Le calcul a échoué. Vérifiez les cartes choisies.</p>}
 
       {status === "idle" && (
-        <p className="hint">{complete ? "" : "Choisissez les 4 cartes pour voir les probabilités, ou essayez un exemple."}</p>
+        <p className="hint">Choisissez les 4 cartes pour voir les probabilités, ou essayez un exemple.</p>
       )}
 
       <div className="actions">
-        <button className="btn btn-ghost" onClick={onSwap} disabled={empty}>⇄ Inverser</button>
-        <button className="btn btn-primary" onClick={onReset} disabled={empty}>Nouvelle main</button>
+        <button className="btn btn-ghost" onClick={onSwap} disabled={empty}>
+          ⇄ Inverser
+        </button>
+        <button className="btn btn-primary" onClick={onReset} disabled={empty}>
+          Nouvelle main
+        </button>
       </div>
     </section>
   );

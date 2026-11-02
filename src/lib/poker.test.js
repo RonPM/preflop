@@ -65,8 +65,10 @@ describe("calcul exact des probabilités", () => {
     expect(r.win1).toBe(r.win2);
   });
 
-  it("refuse une carte utilisée deux fois", () => {
+  it("refuse une carte utilisée deux fois ou une main incomplète", () => {
     expect(() => computeEquity(hand("AsKs"), hand("AsQh"))).toThrow();
+    expect(() => computeEquity([parseCard("As")], hand("QhQd"))).toThrow();
+    expect(() => computeEquity([12, 60], hand("QhQd"))).toThrow();
   });
 });
 

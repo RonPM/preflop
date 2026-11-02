@@ -1,4 +1,5 @@
 import { evaluate } from "./evaluator.js";
+import { isValidCard } from "./cards.js";
 
 // Calcule exactement les chances de chaque joueur avant le flop, en passant en
 // revue tous les tableaux possibles de 5 cartes parmi les 48 cartes restantes
@@ -7,6 +8,8 @@ import { evaluate } from "./evaluator.js";
 // hand1 et hand2 : tableaux de 2 cartes (entiers 0–51), toutes différentes.
 // Retourne { boards, win1, win2, ties }.
 export function computeEquity(hand1, hand2) {
+  if (hand1?.length !== 2 || hand2?.length !== 2) throw new Error("Chaque joueur doit avoir 2 cartes.");
+  if (![...hand1, ...hand2].every(isValidCard)) throw new Error("Carte invalide.");
   const used = new Set([...hand1, ...hand2]);
   if (used.size !== 4) throw new Error("Les 4 cartes doivent être différentes.");
 
@@ -22,7 +25,9 @@ export function computeEquity(hand1, hand2) {
   for (const c of hand1) h1[Math.floor(c / 13)] |= 1 << c % 13;
   for (const c of hand2) h2[Math.floor(c / 13)] |= 1 << c % 13;
 
-  let win1 = 0, win2 = 0, ties = 0;
+  let win1 = 0,
+    win2 = 0,
+    ties = 0;
   const b = [0, 0, 0, 0]; // masques du tableau en cours de construction
 
   // Cinq boucles imbriquées : chaque niveau ajoute une carte au tableau.

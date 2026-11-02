@@ -20,7 +20,15 @@ export const CATEGORIES = [
   "Quinte flush",
 ];
 
-const HIGH_CARD = 0, PAIR = 1, TWO_PAIR = 2, TRIPS = 3, STRAIGHT = 4, FLUSH = 5, FULL_HOUSE = 6, QUADS = 7, STRAIGHT_FLUSH = 8;
+const HIGH_CARD = 0,
+  PAIR = 1,
+  TWO_PAIR = 2,
+  TRIPS = 3,
+  STRAIGHT = 4,
+  FLUSH = 5,
+  FULL_HOUSE = 6,
+  QUADS = 7,
+  STRAIGHT_FLUSH = 8;
 const CAT = 1 << 26;
 const MAIN = 1 << 13;
 

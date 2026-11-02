@@ -26,10 +26,11 @@ export function cardName(card) {
 
 // Lit une carte écrite à l'anglaise, par exemple « As », « Td », « 9c ».
 export function parseCard(text) {
-  const ranks = "23456789TJQKA";
-  const suits = "shdc";
-  const rank = ranks.indexOf(text[0].toUpperCase());
-  const suit = suits.indexOf(text[1].toLowerCase());
-  if (rank < 0 || suit < 0 || text.length !== 2) throw new Error(`Carte invalide : ${text}`);
+  if (typeof text !== "string" || text.length !== 2) throw new Error(`Carte invalide : ${text}`);
+  const rank = "23456789TJQKA".indexOf(text[0].toUpperCase());
+  const suit = "shdc".indexOf(text[1].toLowerCase());
+  if (rank < 0 || suit < 0) throw new Error(`Carte invalide : ${text}`);
   return makeCard(rank, suit);
 }
+
+export const isValidCard = (card) => Number.isInteger(card) && card >= 0 && card < 52;
